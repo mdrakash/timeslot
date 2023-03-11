@@ -17,3 +17,4 @@ Route::post('api/fetch-state',[DropDownController::class,'fatchState']);
 Route::post('api/fetch-cities',[DropDownController::class,'fatchCity']);
 
 Route::get('search', [DropDownController::class, 'autosearch'])->name('search');
+Route::post('get_user', [DropDownController::class, 'get_user'])->name('get_user');

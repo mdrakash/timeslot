@@ -20,6 +20,9 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'country_id',
+        'state_id',
+        'city_id',
     ];
 
     /**
@@ -40,4 +43,18 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function scopeSearch($query,$params)
+    {
+        if(array_key_exists('country',$params)){
+            $query->where('country_id',$params['country']);
+        }
+        if(array_key_exists('state',$params)){
+            $query->where('state_id',$params['state']);
+        }
+        if(array_key_exists('city',$params)){
+            $query->where('city_id',$params['city']);
+        }
+        return $query->get();
+    }
 }

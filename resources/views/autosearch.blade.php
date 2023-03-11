@@ -59,11 +59,23 @@
 
             // initiate a click function on each search result
             $(document).on('click', 'li', function(){
-                    // declare the value in the input field to a variable
-                    var value = $(this).data();
-                    // assign the value to the search box
-                    console.log(value);
-                });
+                // declare the value in the input field to a variable
+                var value = $(this).data();
+                // assign the value to the search box
+                console.log(value);
+                $.ajax({
+                    headers: {
+                        'X-CSRF-TOKEN': "{{ csrf_token() }}"
+                    },                    
+                    url:'{{ route('get_user') }}',
+                    type:'POST',
+                    data:{'data':value},
+                    success:function (data) {
+                        // $('#product_list').html(data);
+                        console.log(data);
+                    }
+                })
+            });
         });
     </script>   
 </body>
